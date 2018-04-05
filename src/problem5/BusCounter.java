@@ -21,13 +21,26 @@ public class BusCounter {
 			schedule[Integer.parseInt(departure[1])][Integer.parseInt(departure[0])] = 'D';
 		}
 		
-		//	SOLUTION: using stack
-		Stack<Character> st = new Stack<Character>();
+		//	SOLUTION
+		int[][] ans  = new int[12][24];
+		int temp = 0;
 		for(int y = 0; y< schedule.length;y++){
 			for(int x = 0; x< schedule[y].length; x++){
-				
+				if(schedule[y][x]=='A') temp = 1;
+				else if(schedule[y][x]=='D') temp=0;
+				ans[y][x] = ans[y][x]+temp;
 			}
 		}
-		
+		//mencari isi tertinggi
+		temp = 0;
+		for(int y = 0; y< schedule.length;y++){
+			for(int x = 0; x< schedule[y].length; x++){
+				//init
+				if(temp==0) temp = ans[y][x];
+				//lebih besar
+				else if(temp<ans[y][x]) temp = ans[y][x];
+			}
+		}
+		System.out.println("OUTPUT: "+temp);
 	}
 }
